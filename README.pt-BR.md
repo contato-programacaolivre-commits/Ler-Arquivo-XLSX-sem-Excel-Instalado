@@ -1,4 +1,4 @@
-[🇺🇸 English](https://github.com/contato-programacaolivre-commits/Ler-Arquivo-XLSX-sem-Excel-Instalado/edit/main/README.md) | 🇧🇷 Português
+[🇺🇸 English](README.md) | 🇧🇷 Português
 
 # Como Ler Planilha Excel no Delphi Sem Office e Sem Drivers (`uLeitorXLSX.pas`)
 
