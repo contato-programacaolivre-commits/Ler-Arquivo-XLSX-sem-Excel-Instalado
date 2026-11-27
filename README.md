@@ -1,60 +1,60 @@
-🇺🇸 English | [🇧🇷 Português](README.pt-BR.md)
+[🇺🇸 English](README.md) | 🇧🇷 Português
 
-# How to Read Excel Files (.XLSX) in Delphi Without Office or External Drivers (`uLeitorXLSX.pas`)
+# Como Ler Planilha Excel no Delphi Sem Office e Sem Drivers (`uLeitorXLSX.pas`)
 
-A lightweight, dependency-free native Delphi unit (**`uLeitorXLSX.pas`**) and VCL sample project demonstrating how to read and import **`.xlsx`** spreadsheets directly into a **`TFDMemTable` + `TDBGrid`** using only native RTL units (`System.Zip` and fast numeric cursor XML parsing) — with zero Microsoft Office dependency, no `ACE.OLEDB` driver conflicts, and no `Out of memory` crashes on large spreadsheets.
+Unit reutilizável (**`uLeitorXLSX.pas`**) e projeto VCL de exemplo demonstrando como **ler planilha Excel no Delphi** (arquivos **`.xlsx`**) e importar os dados diretamente para um **`TFDMemTable` + `TDBGrid`** usando apenas recursos nativos (`System.Zip` e varredura XML por cursor numérico) — sem precisar ter o Microsoft Office instalado, sem drivers externos (`ACE.OLEDB`) e sem estourar memória em planilhas grandes.
 
-> 📖 **Full step-by-step tutorial, benchmarks, and production tips (in Portuguese):**  
+> 📖 **Tutorial completo com explicação detalhada, testes de bancada e dicas de produção:**  
 > [Como Ler Planilha Excel no Delphi Sem Office e Sem Drivers](https://programacaolivre.com.br)
 
 ---
 
-## 🚀 Quick Start (`uLeitorXLSX.pas`)
+## 🚀 Como Usar `uLeitorXLSX.pas` no Seu Projeto
 
-Add `uLeitorXLSX` to your form's `uses` clause and call the class methods:
+Basta adicionar `uLeitorXLSX` na cláusula `uses` do seu formulário e chamar os métodos de classe:
 
 ```delphi
-// 1. Automatically list all real worksheet names into a ComboBox
-TLeitorXLSX.ListarAbas('C:\Data\spreadsheet.xlsx', cbxAbas.Items);
+// 1. Lista automaticamente todas as abas reais da planilha no ComboBox
+TLeitorXLSX.ListarAbas('C:\Dados\planilha.xlsx', cbxAbas.Items);
 
-// 2. Load the chosen sheet starting from the exact header row (ALinhaInicio >= 1)
-TLeitorXLSX.CarregarParaMemTable('C:\Data\spreadsheet.xlsx', 0, memExcel, 1, True);
+// 2. Carrega a aba escolhida a partir da linha exata onde começa a tabela (ALinhaInicio >= 1)
+TLeitorXLSX.CarregarParaMemTable('C:\Dados\planilha.xlsx', 0, memExcel, 1, True);
 
-// 3. Auto-fit TDBGrid column widths based on header and sample rows
+// 3. Ajusta automaticamente a largura das colunas no TDBGrid
 TLeitorXLSX.AjustarLarguraColunasGrid(dbgExcel);
 ```
 
 ---
 
-## 🎯 Key Features & Production Safeguards
+## 🎯 Principais Recursos e Blindagens
 
-* **Zero External Dependencies:** Does not require Microsoft Excel, *Access Database Engine*, or third-party components. Eliminates 32-bit vs. 64-bit Office driver conflicts on client machines.
-* **Explicit Starting Row Control (`ALinhaInicio`):** Easily skip institutional headers or title rows at the top of official/government reports and start reading at the exact table header row.
-* **High Speed Without `Out of Memory`:** Avoids heavy DOM trees (`IXMLDocument`), scanning internal XML via numeric cursor — benchmarked with **26,635 rows and 75 columns** in under 1 second on a **32-bit (`Win32`)** executable.
-* **Data & Grid Formatting:** Converts Excel scientific notation (`7.89E+12`) back to clean integer strings, ignores empty cells formatted up to `XFD1`, and auto-sizes `TDBGrid` columns.
-
----
-
-## 📂 Repository Structure
-
-* `uLeitorXLSX.pas` — Decoupled, commented native `.xlsx` reader unit and `TDBGrid` auto-fit helper.
-* `uPrincipal.pas` / `uPrincipal.dfm` — Ready-to-compile VCL demo application.
+* **Zero Dependências Externas:** Não exige Microsoft Office, não instala *Access Database Engine* e elimina conflitos de arquitetura entre Office 64-bit e executáveis Delphi 32-bit (`Win32`).
+* **Controle Explícito de Linha Inicial (`ALinhaInicio`):** Permite pular cabeçalhos institucionais ou títulos soltos nas primeiras linhas de relatórios oficiais e iniciar a importação exatamente na linha das colunas reais.
+* **Alta Performance Sem `Out of Memory`:** Evita árvores DOM pesadas (`IXMLDocument`), percorrendo o XML interno por cursor numérico — testado na bancada com **26.635 registros e 75 colunas** em menos de 1 segundo em `Win32`.
+* **Tratamento de Códigos e Células Vazias:** Converte notações científicas do Excel (`7.89E+12`) de volta para dígitos inteiros limpos, ignora células vazias formatadas até `XFD1` e ajusta automaticamente a largura das colunas na grade.
 
 ---
 
-## 🛠️ Compatibility
+## 📂 Arquivos do Repositório
 
-* **Tested on:** Embarcadero Delphi Community Edition (Windows 32-bit and 64-bit).
-* **Backward-compatible with:** Delphi 10 Seattle, Delphi XE, and newer versions supporting `System.Zip` and FireDAC (classic syntax, no inline variables, zero compiler warnings).
-
----
-
-## ⚠️ Disclaimer
-
-The code provided in this repository is intended for educational and general development purposes. Always test and validate the routines in your own staging environment and spreadsheet structures before deploying to production.
+* `uLeitorXLSX.pas` — Unit desacoplada e comentada com toda a lógica de leitura do `.xlsx` e ajuste visual do `TDBGrid`.
+* `uPrincipal.pas` / `uPrincipal.dfm` — Formulário VCL de demonstração pronto para compilar e testar.
 
 ---
 
-## 📄 Author
+## 🛠️ Compatibilidade
 
-Maintained by **[Programação Livre](https://programacaolivre.com.br)**.
+* **Desenvolvido e testado em:** Embarcadero Delphi Community Edition (Windows 32-bit e 64-bit).
+* **Retrocompatível com:** Delphi 10 Seattle, Delphi XE e versões superiores com `System.Zip` e FireDAC (sintaxe clássica, sem *inline variables* e sem *warnings* de compilação).
+
+---
+
+## ⚠️ Nota de Boas Práticas
+
+Os códigos deste repositório têm finalidade educacional e são disponibilizados para uso livre. Valide e homologue a rotina no seu próprio ambiente e estrutura de planilhas antes de implantar em sistemas de produção.
+
+---
+
+## 📄 Autor
+
+Desenvolvido e mantido pelo hub **[Programação Livre](https://programacaolivre.com.br)**.
