@@ -1,4 +1,4 @@
-[🇺🇸 English](README.md) | 🇧🇷 Português
+🌐 **Language / Idioma:** [Português (Brasil)](README.md) | [English](README.en.md)
 
 # Como Ler Planilha Excel no Delphi Sem Office e Sem Drivers (`uLeitorXLSX.pas`)
 
